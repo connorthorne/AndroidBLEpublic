@@ -2,6 +2,8 @@ package com.example.bletutorial.presentation
 
 import android.bluetooth.BluetoothAdapter
 import android.graphics.Paint.Align
+import android.os.Debug
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -23,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import androidx.navigation.NavController
 import com.example.bletutorial.data.ConnectionState
 import com.example.bletutorial.presentation.permissions.PermissionUtils
 import com.example.bletutorial.presentation.permissions.SystemBroadcastReceiver
@@ -33,7 +36,8 @@ import com.google.accompanist.permissions.rememberMultiplePermissionsState
 @Composable
 fun SAFEButtonScreen(
     onBluetoothStateChanged:()->Unit,
-    viewModel: SAFEButtonViewModel = hiltViewModel()
+    viewModel: SAFEButtonViewModel = hiltViewModel(),
+    navController: NavController
 ){
 
     SystemBroadcastReceiver(systemAction = BluetoothAdapter.ACTION_STATE_CHANGED){bluetoothState ->
@@ -152,6 +156,8 @@ fun SAFEButtonScreen(
                         style = MaterialTheme.typography.h6
                     )
                 }
+            }else{
+                Log.d("Else check","Was not initializing, error, or connected.")
             }
         }
 

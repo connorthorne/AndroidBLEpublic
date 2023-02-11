@@ -20,7 +20,8 @@ fun Navigation (
 
         composable(Screen.SAFEButtonScreen.route){
             SAFEButtonScreen(
-                onBluetoothStateChanged
+                onBluetoothStateChanged,
+                navController = navController
             )
         }
     }

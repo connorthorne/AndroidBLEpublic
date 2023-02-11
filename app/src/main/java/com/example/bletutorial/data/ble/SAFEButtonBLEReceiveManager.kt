@@ -35,12 +35,12 @@ class SAFEButtonBLEReceiveManager @Inject constructor(
 ) : SAFEButtonReceiveManager{
 
     //name of the device, not sure if this can be customized on the ESP32
-    private val DEVICE_NAME = "SAFE ESP32"
+    private val DEVICE_NAME = "SAFE_Button"
 
     //these should be in the ESP32 users manual somewhere, will need to be renamed
     //and there may be additional values to add, these get called at onMTUChanged
-    private val TEMP_HUMIDITY_SERVICE_UUID = "placeholder"
-    private val TEMP_HUMIDITY_CHARACTERISTICS_UUID = "placeholder"
+    private val TEMP_HUMIDITY_SERVICE_UUID = "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
+    private val TEMP_HUMIDITY_CHARACTERISTICS_UUID = "beb5483e-36e1-4688-b7f5-ea07361b26a8"
 
     override val data: MutableSharedFlow<Resource<SAFEButtonResult>>
         get() = MutableSharedFlow()
