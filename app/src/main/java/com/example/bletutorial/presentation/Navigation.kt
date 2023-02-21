@@ -24,11 +24,14 @@ fun Navigation (
                 navController = navController
             )
         }
+        composable(Screen.ContactScreen.route){
+            ContactScreen(navController = navController)
+        }
     }
 }
 
 sealed class Screen(val route:String){
     object StartScreen:Screen("start_screen")
     object SAFEButtonScreen:Screen("safe_button_screen")
-
+    object ContactScreen:Screen("contact_screen")
 }

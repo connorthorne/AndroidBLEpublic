@@ -20,32 +20,60 @@ import androidx.navigation.NavController
 @Composable
 fun StartScreen(
     navController: NavController
-){
+) {
     Box(
-        modifier = Modifier.fillMaxSize(), 
+        modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
-    ){
-            Box(modifier = Modifier
+    ) {
+        Box(
+            modifier = Modifier
                 .size(150.dp)
                 .clip(CircleShape)
                 .background(Color.Blue, CircleShape)
                 .clickable {
                     //Navigate
-                    navController.navigate(Screen.SAFEButtonScreen.route){
-                        popUpTo(Screen.StartScreen.route){
+                    navController.navigate(Screen.SAFEButtonScreen.route) {
+                        popUpTo(Screen.StartScreen.route) {
                             inclusive = true
                         }
                     }
                 },
             contentAlignment = Alignment.Center
-            ){
-                Text(
-                    text = "Start",
-                    fontSize = 35.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White
-                )
-            }
-        
+        ) {
+            Text(
+                text = "Start",
+                fontSize = 35.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+        }
+
+    }
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.BottomCenter
+    ) {
+        Box(
+            modifier = Modifier
+                .size(75.dp)
+                .clip(CircleShape)
+                .background(Color.Blue, CircleShape)
+                .clickable {
+                    //Navigate
+                    navController.navigate(Screen.ContactScreen.route) {
+                        popUpTo(Screen.ContactScreen.route) {
+                            inclusive = true
+                        }
+                    }
+                },
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "Contacts",
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+        }
     }
 }
