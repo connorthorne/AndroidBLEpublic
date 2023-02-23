@@ -51,7 +51,7 @@ fun StartScreen(
     }
     Box(
         modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.BottomCenter
+        contentAlignment = Alignment.BottomStart
     ) {
         Box(
             modifier = Modifier
@@ -70,6 +70,33 @@ fun StartScreen(
         ) {
             Text(
                 text = "Contacts",
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+        }
+    }
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.BottomEnd
+    ) {
+        Box(
+            modifier = Modifier
+                .size(75.dp)
+                .clip(CircleShape)
+                .background(Color.Blue, CircleShape)
+                .clickable {
+                    //Navigate
+                    navController.navigate(Screen.MapScreen.route) {
+                        popUpTo(Screen.MapScreen.route) {
+                            inclusive = true
+                        }
+                    }
+                },
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "Map",
                 fontSize = 15.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White
