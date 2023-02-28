@@ -1,13 +1,7 @@
 package com.example.bletutorial.data.ble
 
 import android.annotation.SuppressLint
-import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothDevice
-import android.bluetooth.BluetoothGatt
-import android.bluetooth.BluetoothGattCallback
-import android.bluetooth.BluetoothGattCharacteristic
-import android.bluetooth.BluetoothGattDescriptor
-import android.bluetooth.BluetoothProfile
+import android.bluetooth.*
 import android.bluetooth.le.ScanCallback
 import android.bluetooth.le.ScanResult
 import android.bluetooth.le.ScanSettings
@@ -23,7 +17,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
-import java.util.UUID
+import java.util.*
 import javax.inject.Inject
 
 //wants Bluetooth_Connect permission in the manifest, will be added in the UI instead
@@ -41,6 +35,7 @@ class SAFEButtonBLEReceiveManager @Inject constructor(
     //and there may be additional values to add, these get called at onMTUChanged
     private val TEMP_HUMIDITY_SERVICE_UUID = "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
     private val TEMP_HUMIDITY_CHARACTERISTICS_UUID = "beb5483e-36e1-4688-b7f5-ea07361b26a8"
+    private val CHARGE_PERCENTAGE_CHARACTERISTIC_UUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E"
 
     override val data: MutableSharedFlow<Resource<SAFEButtonResult>>
         get() = MutableSharedFlow()
@@ -248,7 +243,7 @@ class SAFEButtonBLEReceiveManager @Inject constructor(
         val cccdUuid = UUID.fromString(CCCD_DESCRIPTOR_UUID)
         characteristic.getDescriptor(cccdUuid)?.let { cccdDescriptor ->
             if(gatt?.setCharacteristicNotification(characteristic, false) == false){
-                Log.d("SafeButtonReceiveMngr", "Set characteristics notifcation failed")
+                Log.d("SafeButtonReceiveMngr", "Set characteristics notification failed")
                 return
             }
             writeDescription(cccdDescriptor, BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE)
