@@ -2,6 +2,8 @@ package com.example.bletutorial
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bletutorial.databinding.ActivityMapsBinding
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -16,8 +18,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
 
-    @Suppress("DEPRECATION")
-    val myPos = intent.getParcelableExtra(MainActivity.PKEY) as UserLocation?
+
+
+        //intent.getParcelableExtra(MainActivity.PKEY) as UserLocation?
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -42,12 +45,26 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * installed Google Play services and returned to the app.
      */
     override fun onMapReady(googleMap: GoogleMap) {
-        Log.d("map debug", "My position is $myPos")
+        //val myLat  = intent.getDoubleExtra(MainActivity.PKEYLAT, 0.0)
+        //val myLong = intent.getDoubleExtra(MainActivity.PKEYLONG, 0.0)
+        val myPos = intent.getParcelableExtra(MainActivity.PKEY) as UserLocation?
+        Log.d("map debug", "My position is ${myPos?.latitude}, ${myPos?.longitude}")
         mMap = googleMap
 
+        val myLat = myPos!!.latitude
+        val myLong = myPos!!.longitude
         // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        val crimeLog: Button = findViewById(R.id.logButton)
+        crimeLog.setOnClickListener{
+            //val sydney = LatLng((-90..90).random().toDouble(), (-180..180).random().toDouble())
+            val currentLocation = LatLng(myLat, myLong)
+            mMap.addMarker(MarkerOptions().position(currentLocation).title("Marker in Sydney"))
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation))
+
+            val toast = Toast.makeText(applicationContext, "Data logged", Toast.LENGTH_SHORT)
+            toast.show()
+        }
+
     }
 }

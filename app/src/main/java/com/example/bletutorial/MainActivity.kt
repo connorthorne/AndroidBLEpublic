@@ -39,8 +39,11 @@ class MainActivity : ComponentActivity() {
     private lateinit var locationCallback: LocationCallback
 
     companion object{
+        const val PKEYLAT = "user_lat"
+        const val PKEYLONG = "user_long"
         const val PKEY = "user_location"
     }
+
 
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,8 +73,15 @@ class MainActivity : ComponentActivity() {
                     //figure out why this is not working and how to pass the data from
                     //MainActivity to MapsActivity correctly
 
-                    //val intent = Intent(this@MainActivity, MapsActivity::class.java)
-                    //intent.putExtra(PKEY, arrayOf(myPos.latitude,myPos.longitude))
+                    /*val crimeLog: Button = findViewById(R.id.logButton)
+                    crimeLog.setOnClickListener{*/
+
+                        val intent = Intent(this@MainActivity, MapsActivity::class.java)
+                        //intent.putExtra(PKEYLAT, myPos.latitude)
+                        //intent.putExtra(PKEYLONG, myPos.longitude)
+                        intent.putExtra(PKEY, myPos)
+                    //}
+
                     //startActivity(intent)
                 }
             }

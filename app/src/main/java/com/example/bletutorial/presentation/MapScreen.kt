@@ -40,9 +40,10 @@ fun MapScreen(
     //https://developers.google.com/maps/documentation/android-sdk/maps-compose
     //https://googlemaps.github.io/android-maps-compose/maps-compose/com.google.maps.android.compose/-google-map.html
     //val singapore = LatLng(1.35, 103.87)
-    val myPosition = LatLng(1.35, 103.87)
+    //Ucross - 39.9560729,-75.1924832
+    val myPosition = LatLng(39.9536534, -75.1890614)
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(myPosition, 10f)
+        position = CameraPosition.fromLatLngZoom(myPosition, 17f)
 
     }
     GoogleMap(
